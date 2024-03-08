@@ -126,4 +126,4 @@ WORD PaletteSize (LPSTR lpDIB);
 WORD PrintDIB (HDIB, WORD, WORD, WORD, LPSTR);
 WORD PrintScreen (LPRECT, WORD, WORD, WORD, LPSTR);
 WORD PrintWindow (HWND, WORD, WORD, WORD, WORD, LPSTR);
-WORD SaveDIB (HDIB, const char*);
+WORD SaveDIB (HDIB, const TCHAR*);

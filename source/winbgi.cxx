@@ -55,7 +55,7 @@ BOOL registerWindowClass( )
 // again if using LoadLibrary and FreeLibrary
 void unregisterWindowClass( )
 {
-    UnregisterClass( "BGILibrary", BGI__hInstance );
+    UnregisterClass( _T("BGILibrary"), BGI__hInstance );
 }
 
 
@@ -89,7 +89,7 @@ bool DllMain_MGM(
 
 
 
-void showerrorbox( const char* msg )
+void showerrorbox( const TCHAR* msg )
 {
     LPVOID lpMsgBuf;
 
@@ -107,13 +107,13 @@ void showerrorbox( const char* msg )
             0,                                      // Minimum size of buffer
             NULL );
 
-        MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONERROR );
+        MessageBox( NULL, (LPCTSTR)lpMsgBuf, _T("Error"), MB_OK | MB_ICONERROR );
 
         // Free the buffer
         LocalFree( lpMsgBuf );
     }
     else
-        MessageBox( NULL, msg, "Error", MB_OK | MB_ICONERROR );
+        MessageBox( NULL, msg, _T("Error"), MB_OK | MB_ICONERROR );
 }
 
 
@@ -271,7 +271,7 @@ using namespace std;
 //               On failure, -1.
 //
 int initwindow
-( int width, int height, const char* title, int left, int top, bool dbflag , bool closeflag)
+( int width, int height, const TCHAR* title, int left, int top, bool dbflag , bool closeflag)
 {
     HANDLE hThread;                     // Handle to the message pump thread
     int index;                          // Index of current window in the table

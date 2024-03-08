@@ -31,7 +31,7 @@ struct WindowData
     int width;                  // Width of window to create
     int height;                 // Height of window to create
     int initleft, inittop;      // Initial top and left coordinates on screen
-    std::string title;          // Title at the top of the window
+    std::basic_string<TCHAR> title;   // Title at the top of the window
     std::queue<TCHAR> kbd_queue;// Queue of keyboard characters
     arccoordstype arcInfo;      // Information about the last arc drawn
     fillsettingstype fillInfo;  // Information about the fill style

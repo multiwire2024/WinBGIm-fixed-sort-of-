@@ -55,19 +55,19 @@ static int font_family[] =
     VARIABLE_PITCH|FF_DONTCARE,  // EuropeanFont
     VARIABLE_PITCH|FF_DONTCARE   // BoldFont
 };
-static const char* font_name[] =
+static const TCHAR* font_name[] =
 {
-    "Console",          // DefaultFont
-    "Times New Roman",  // TriplexFont
-    "Small Fonts",      // SmallFont
-    "MS Sans Serif",    // SansSerifFont
-    "Arial",            // GothicFont
-    "Script",           // ScriptFont
-    "Times New Roman",  // SimplexFont
-    "Script",           // TriplexScriptFont
-    "Courier New",      // ComplexFont
-    "Times New Roman",  // EuropeanFont
-    "Courier New Bold", // BoldFont
+    _T("Console"),          // DefaultFont
+    _T("Times New Roman"),  // TriplexFont
+    _T("Small Fonts"),      // SmallFont
+    _T("MS Sans Serif"),    // SansSerifFont
+    _T("Arial"),            // GothicFont
+    _T("Script"),           // ScriptFont
+    _T("Times New Roman"),  // SimplexFont
+    _T("Script"),           // TriplexScriptFont
+    _T("Courier New"),      // ComplexFont
+    _T("Times New Roman"),  // EuropeanFont
+    _T("Courier New Bold"), // BoldFont
 };
 
 static struct { int width; int height; } font_metrics[][11] = {

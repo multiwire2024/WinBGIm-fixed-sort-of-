@@ -22,6 +22,7 @@
 #include <ocidl.h>          // IPicture
 #include <olectl.h>         // Support for iPicture
 #include <string.h>         // Provides strlen
+#include <tchar.h>
 #include "winbgim.h"         // API routines
 #include "winbgitypes.h"    // Internal structure data
 #include "dibapi.h"         // DIB functions from Microsoft
@@ -942,7 +943,7 @@ void putimage( int left, int top, void *bitmap, int op )
     DeleteDC(hMemoryDC);                 // Delete the memory dc and it's bmp
 }
 
-static LPPICTURE readipicture(const char* filename)
+static LPPICTURE readipicture(const TCHAR* filename)
 {
     // The only way that I have found to use OleLoadImage is to first put all
     // the picture information into a stream. Based on Serguei's implementation
@@ -1037,7 +1038,7 @@ static LPPICTURE readipicture(const char* filename)
 }
 
 void readimagefile(
-    const char* filename,
+    const TCHAR* filename,
     int left, int top, int right, int bottom
     )
 {
@@ -1081,7 +1082,7 @@ void readimagefile(
 }    
 
 void writeimagefile(
-    const char* filename,
+    const TCHAR* filename,
     int left, int top, int right, int bottom,
     bool active, HWND hwnd
     )
@@ -1106,8 +1107,8 @@ void writeimagefile(
 	ofn.nMaxFile = MAX_PATH+1;
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_HIDEREADONLY | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT;
 	if (!GetSaveFileName(&ofn)) return;
-	if (strlen(fn) < 4 || (fn[strlen(fn)-4] != '.' && strlen(fn) < MAX_PATH-4))
-	    strcat(fn, ".BMP");
+	if (_tcslen(fn) < 4 || (fn[_tcslen(fn)-4] != '.' && _tcslen(fn) < MAX_PATH-4))
+	    _tcscat(fn, L".BMP");
     }
 
     // Preliminary computations
@@ -1142,9 +1143,9 @@ void writeimagefile(
     // Get the equivalent DIB and write it to the file
     hDIB = BitmapToDIB(hBitmap, NULL);
     if (filename == NULL)
-	SaveDIB(hDIB, fn);
+	    SaveDIB(hDIB, fn);
     else
-	SaveDIB(hDIB, filename);
+	    SaveDIB(hDIB, filename);
     
     // Delete resources
     ReleaseMutex(pWndData->hDCMutex);
@@ -1155,7 +1156,7 @@ void writeimagefile(
 }
 
 void printimage(
-    const char* title,
+    const TCHAR* title,
     double width_inches, double border_left_inches, double border_top_inches,
     int left, int top, int right, int bottom, bool active, HWND hwnd
     )
@@ -1230,14 +1231,14 @@ void printimage(
     // Set up a DOCINFO structure.
     memset(&di, 0, sizeof(DOCINFO));
     di.cbSize = sizeof(DOCINFO);
-    di.lpszDocName = "Windows BGI";
+    di.lpszDocName = _T("Windows BGI");
 
     // StartDoc, print stuff, EndDoc
     if (StartDoc(pd_Printer.hDC, &di) != SP_ERROR)
     {   
         StartPage(pd_Printer.hDC);
 	if (title == NULL) title = pWndData->title.c_str( );
-	titlelen = strlen(title);
+	titlelen = _tcslen(title);
 	if (titlelen > 0)
 	{
 	    TextOut(pd_Printer.hDC, int(pixels_per_inch_x*border_left_inches), int(pixels_per_inch_y*border_top_inches), title, titlelen);

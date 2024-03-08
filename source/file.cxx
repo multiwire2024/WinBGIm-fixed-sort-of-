@@ -62,7 +62,7 @@ BOOL WriteDIB(LPSTR, HANDLE);
  *
  *************************************************************************/
 
-HDIB LoadDIB(const char* lpFileName)
+HDIB LoadDIB(const TCHAR* lpFileName)
 {
     HDIB        hDIB;
     HANDLE      hFile;
@@ -111,7 +111,7 @@ HDIB LoadDIB(const char* lpFileName)
  *
  *************************************************************************/
 
-WORD SaveDIB(HDIB hDib, const char* lpFileName)
+WORD SaveDIB(HDIB hDib, const TCHAR* lpFileName)
 {
     BITMAPFILEHEADER    bmfHdr;     // Header for Bitmap file
     LPBITMAPINFOHEADER  lpBI;       // Pointer to DIB info structure
